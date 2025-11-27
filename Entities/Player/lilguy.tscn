@@ -1,0 +1,78 @@
+[gd_scene load_steps=8 format=3 uid="uid://dxe1srogdi7b1"]
+
+[ext_resource type="Script" uid="uid://emnsl85ecqrp" path="res://lilguy.gd" id="1_4a74w"]
+[ext_resource type="Texture2D" uid="uid://cfrfdgnyddrbf" path="res://placeholder assets/2D Pixel Dungeon Asset Pack/items and trap_animation/arrow/Just_arrow.png" id="2_dfffb"]
+[ext_resource type="Texture2D" uid="uid://cuisms0quqod5" path="res://placeholder assets/2D Pixel Dungeon Asset Pack/interface/arrow_1.png" id="2_oiqn2"]
+[ext_resource type="Texture2D" uid="uid://bwml47c6fliq3" path="res://placeholder assets/2D Pixel Dungeon Asset Pack/character and tileset/Dungeon_Character.png" id="2_yb4ym"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oiqn2"]
+size = Vector2(4, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4a74w"]
+size = Vector2(16, 16)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dfffb"]
+radius = 24.0
+
+[node name="Lilguy" type="CharacterBody2D" groups=["Player"]]
+collision_mask = 33
+motion_mode = 1
+script = ExtResource("1_4a74w")
+
+[node name="Arm control" type="Node2D" parent="."]
+position = Vector2(8, 8)
+
+[node name="AimPlaceHolder" type="Sprite2D" parent="Arm control"]
+modulate = Color(1, 1, 1, 0.5176471)
+position = Vector2(16, 0)
+rotation = -1.5707964
+texture = ExtResource("2_dfffb")
+
+[node name="Marker2D" type="Marker2D" parent="Arm control"]
+position = Vector2(18, 0)
+
+[node name="Handbox" type="Area2D" parent="Arm control"]
+collision_layer = 0
+collision_mask = 4
+
+[node name="Area2D" type="CollisionShape2D" parent="Arm control/Handbox"]
+position = Vector2(18, 0)
+shape = SubResource("RectangleShape2D_oiqn2")
+
+[node name="SpritePlaceHolder" type="Sprite2D" parent="."]
+position = Vector2(8, 8)
+texture = ExtResource("2_yb4ym")
+hframes = 7
+vframes = 4
+frame = 8
+
+[node name="Colbox" type="CollisionShape2D" parent="."]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_4a74w")
+debug_color = Color(1, 0, 0, 0.419608)
+
+[node name="Trinket compass" type="Node2D" parent="."]
+position = Vector2(8, 8)
+
+[node name="CompassSprite" type="Sprite2D" parent="Trinket compass"]
+modulate = Color(1, 1, 1, 0.29411766)
+position = Vector2(8, 0)
+rotation = -1.5707964
+texture = ExtResource("2_oiqn2")
+
+[node name="Crumbtimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="CrumbMarker" type="Marker2D" parent="."]
+position = Vector2(8, 8)
+
+[node name="Detectbox" type="Area2D" parent="." groups=["Player"]]
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detectbox"]
+position = Vector2(8, 8)
+shape = SubResource("CircleShape2D_dfffb")
+
+[connection signal="area_entered" from="Arm control/Handbox" to="." method="_on_handbox_area_entered"]
+[connection signal="area_exited" from="Arm control/Handbox" to="." method="_on_handbox_area_exited"]

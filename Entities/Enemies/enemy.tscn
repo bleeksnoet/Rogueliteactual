@@ -1,0 +1,56 @@
+[gd_scene load_steps=5 format=3 uid="uid://dni12m8gwrv15"]
+
+[ext_resource type="Script" uid="uid://daeqh6k32pevf" path="res://Entities/Enemies/enemy.gd" id="1_7o3vr"]
+[ext_resource type="Texture2D" uid="uid://bne5qtirvnyu5" path="res://placeholder assets/2D Pixel Dungeon Asset Pack/character and tileset/Dungeon_Character_2.png" id="2_wbf3x"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_csyt6"]
+size = Vector2(12, 16)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wbf3x"]
+radius = 32.0
+
+[node name="Enemy" type="CharacterBody2D" groups=["Enemy"]]
+collision_layer = 2
+collision_mask = 33
+script = ExtResource("1_7o3vr")
+
+[node name="Memory" type="Timer" parent="."]
+one_shot = true
+
+[node name="ColorRect" type="Sprite2D" parent="."]
+texture = ExtResource("2_wbf3x")
+hframes = 7
+vframes = 2
+frame = 10
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_csyt6")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 16
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -0.3125)
+shape = SubResource("RectangleShape2D_csyt6")
+
+[node name="Crumbseeker" type="RayCast2D" parent="."]
+target_position = Vector2(5, 0)
+collision_mask = 33
+collide_with_areas = true
+
+[node name="The crumb snifferr" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 9
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="The crumb snifferr"]
+shape = SubResource("CircleShape2D_wbf3x")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_postprocessing = 1
+avoidance_layers = 2
+avoidance_mask = 2
+debug_enabled = true
+
+[connection signal="timeout" from="Memory" to="." method="_on_memory_timeout"]
+[connection signal="area_entered" from="The crumb snifferr" to="." method="_on_the_crumb_snifferr_area_entered"]

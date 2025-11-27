@@ -1,0 +1,52 @@
+[gd_scene load_steps=6 format=3 uid="uid://ck56ybjwt5sse"]
+
+[ext_resource type="Script" uid="uid://crsyrispur70u" path="res://Entities/objects/grispable.gd" id="1_frny7"]
+[ext_resource type="Texture2D" uid="uid://bloiggkthwn0b" path="res://placeholder assets/2D Pixel Dungeon Asset Pack/items and trap_animation/flasks/flasks_1_4.png" id="2_vo6hu"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_chysi"]
+rough = true
+bounce = 0.2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qsb1i"]
+size = Vector2(8, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vo6hu"]
+size = Vector2(6, 8)
+
+[node name="Grispable" type="RigidBody2D" groups=["Trinket"]]
+collision_layer = 2
+collision_mask = 33
+physics_material_override = SubResource("PhysicsMaterial_chysi")
+lock_rotation = true
+contact_monitor = true
+max_contacts_reported = 10
+linear_damp = 5.0
+script = ExtResource("1_frny7")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 16
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_qsb1i")
+
+[node name="ColorRect" type="Sprite2D" parent="."]
+texture = ExtResource("2_vo6hu")
+
+[node name="CollisionBox" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_vo6hu")
+
+[node name="Grispbox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Grispbox"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_qsb1i")
+
+[node name="Crumbtimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]

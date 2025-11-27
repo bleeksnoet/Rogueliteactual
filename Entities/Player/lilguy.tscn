@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://dxe1srogdi7b1"]
 
-[ext_resource type="Script" uid="uid://emnsl85ecqrp" path="res://lilguy.gd" id="1_4a74w"]
+[ext_resource type="Script" uid="uid://emnsl85ecqrp" path="res://Entities/Player/lilguy.gd" id="1_4a74w"]
 [ext_resource type="Texture2D" uid="uid://cfrfdgnyddrbf" path="res://placeholder assets/2D Pixel Dungeon Asset Pack/items and trap_animation/arrow/Just_arrow.png" id="2_dfffb"]
 [ext_resource type="Texture2D" uid="uid://cuisms0quqod5" path="res://placeholder assets/2D Pixel Dungeon Asset Pack/interface/arrow_1.png" id="2_oiqn2"]
 [ext_resource type="Texture2D" uid="uid://bwml47c6fliq3" path="res://placeholder assets/2D Pixel Dungeon Asset Pack/character and tileset/Dungeon_Character.png" id="2_yb4ym"]

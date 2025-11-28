@@ -14,8 +14,8 @@ size = Vector2(8, 10)
 size = Vector2(6, 8)
 
 [node name="Grispable" type="RigidBody2D" groups=["Trinket"]]
-collision_layer = 2
-collision_mask = 33
+collision_layer = 4
+collision_mask = 35
 physics_material_override = SubResource("PhysicsMaterial_chysi")
 lock_rotation = true
 contact_monitor = true
@@ -24,8 +24,8 @@ linear_damp = 5.0
 script = ExtResource("1_frny7")
 
 [node name="Hurtbox" type="Area2D" parent="."]
-collision_layer = 16
-collision_mask = 16
+collision_layer = 20
+collision_mask = 18
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2(0, 1)

@@ -36,7 +36,7 @@ func _physics_process(delta: float) -> void:
 			GrispedObject.freeze = false
 			Clicked = false
 		
-			var force = 400
+			var force = 600
 			var direction = (get_global_mouse_position() - GrispedObject.global_position).normalized()
 			GrispedObject.apply_impulse(direction * force)
 			GrispedObject.IsWeapon = true

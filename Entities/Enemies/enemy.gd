@@ -4,17 +4,36 @@ extends CharacterBody2D
 @onready var Crumbcast = $Crumbseeker
 @onready var Memory = $Memory
 @export var HP = 3
-@export var Speed = 100
+@export var Speed = 50
+
+@onready var Sprite = $ColorRect
+@onready var AnimPlayer = $AnimationPlayer
+
+#region detection stuff
 var LastSeen: Vector2
 var PlayerLastSeen = false
 var LostSight = false
 var Player: Node2D
+#endregion
 
+#region knockback and stun stuff
+var Stunned = false
+var StunTimer = 0
+var KnockBackVelocity = Vector2.ZERO
+#endregion
 func _ready() -> void:
+	AnimPlayer.play("RESET")
 	NavAgent.target_desired_distance = 4
 	Player = get_tree().get_first_node_in_group("Player")
 
 func _physics_process(delta: float) -> void:
+	if Stunned == true:
+		StunTimer -= delta
+		move_and_slide()
+		
+		if StunTimer <= 0:
+			Stunned = false
+		return
 	seek_out_target()
 
 
@@ -29,7 +48,6 @@ func seek_out_target():
 	if NavAgent.is_navigation_finished():
 		if PlayerLastSeen == true:
 			LostSight = true
-			print("player lost, switching...")
 			PlayerLastSeen = false
 			if Memory.is_stopped():
 				Memory.start()
@@ -44,11 +62,15 @@ func seek_out_target():
 	
 	move_and_slide()
 
-func attacked():
-	if !HP <= 1:
-		HP -= 1
-	else:
-		queue_free()
+func attacked(duration):
+	Stunned = true
+	StunTimer = duration
+	print("stunned")
+	NavAgent.set_velocity(Vector2.ZERO)
+	velocity = Vector2.ZERO
+	AnimPlayer.play("Hurt")
+	print("ouch")
+
 
 
 func _on_the_crumb_snifferr_area_entered(area: Area2D) -> void:
@@ -62,10 +84,8 @@ func _on_the_crumb_snifferr_area_entered(area: Area2D) -> void:
 		if target.is_in_group("Player"):
 			LastSeen = area.global_position
 			PlayerLastSeen = true
-			print("player found!")
 
 
 func _on_memory_timeout() -> void:
-	print("memory ran out, stalking stopped")
 	PlayerLastSeen = false
 	LostSight = false

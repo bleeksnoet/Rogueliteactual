@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dni12m8gwrv15"]
+[gd_scene load_steps=8 format=3 uid="uid://dni12m8gwrv15"]
 
 [ext_resource type="Script" uid="uid://daeqh6k32pevf" path="res://Entities/Enemies/enemy.gd" id="1_7o3vr"]
 [ext_resource type="Texture2D" uid="uid://bne5qtirvnyu5" path="res://placeholder assets/2D Pixel Dungeon Asset Pack/character and tileset/Dungeon_Character_2.png" id="2_wbf3x"]
@@ -7,7 +7,32 @@
 size = Vector2(12, 16)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wbf3x"]
-radius = 32.0
+radius = 16.0
+
+[sub_resource type="Animation" id="Animation_wbf3x"]
+resource_name = "Hurt"
+length = 0.33333668
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.16695125, 0.33333668),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_6rqwt"]
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4jf10"]
+_data = {
+&"Hurt": SubResource("Animation_wbf3x"),
+&"RESET": SubResource("Animation_6rqwt")
+}
 
 [node name="Enemy" type="CharacterBody2D" groups=["Enemy"]]
 collision_layer = 2
@@ -28,7 +53,7 @@ shape = SubResource("RectangleShape2D_csyt6")
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 16
-collision_mask = 16
+collision_mask = 20
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(0, -0.3125)
@@ -51,6 +76,11 @@ path_postprocessing = 1
 avoidance_layers = 2
 avoidance_mask = 2
 debug_enabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_4jf10")
+}
 
 [connection signal="timeout" from="Memory" to="." method="_on_memory_timeout"]
 [connection signal="area_entered" from="The crumb snifferr" to="." method="_on_the_crumb_snifferr_area_entered"]

@@ -1,6 +1,4 @@
 res://Entities/Enemies/enemy.tscn
 res://Entities/Enemies/enemy.gd
-res://Entities/objects/trinket.tscn
 res://Entities/objects/grispable.gd
-res://Entities/Player/lilguy.gd
 res://Entities/Player/lilguy.tscn

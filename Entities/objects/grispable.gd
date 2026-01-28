@@ -27,5 +27,5 @@ func crumbs():
 func _on_hurtbox_area_entered(area: Area2D) -> void:
 	var Target = area.get_parent()
 	if IsWeapon and Target.is_in_group("Enemy"):
-		Target.attacked(5)
+		Target.attacked(1,100, $".".global_position)
 		IsWeapon = false

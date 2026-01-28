@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dni12m8gwrv15"]
+[gd_scene load_steps=9 format=3 uid="uid://dni12m8gwrv15"]
 
 [ext_resource type="Script" uid="uid://daeqh6k32pevf" path="res://Entities/Enemies/enemy.gd" id="1_7o3vr"]
 [ext_resource type="Texture2D" uid="uid://bne5qtirvnyu5" path="res://placeholder assets/2D Pixel Dungeon Asset Pack/character and tileset/Dungeon_Character_2.png" id="2_wbf3x"]
@@ -27,11 +27,40 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_6rqwt"]
 length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_4jf10"]
+resource_name = "Strike"
+length = 0.33333668
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.16834594, 0.33333668),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.6367873, 0.00030149103, 0.63678306, 1), Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4jf10"]
 _data = {
 &"Hurt": SubResource("Animation_wbf3x"),
-&"RESET": SubResource("Animation_6rqwt")
+&"RESET": SubResource("Animation_6rqwt"),
+&"Strike": SubResource("Animation_4jf10")
 }
 
 [node name="Enemy" type="CharacterBody2D" groups=["Enemy"]]
@@ -49,9 +78,11 @@ vframes = 2
 frame = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("RectangleShape2D_csyt6")
 
 [node name="Hitbox" type="Area2D" parent="."]
+visible = false
 collision_layer = 16
 collision_mask = 20
 
@@ -59,17 +90,25 @@ collision_mask = 20
 position = Vector2(0, -0.3125)
 shape = SubResource("RectangleShape2D_csyt6")
 
-[node name="Crumbseeker" type="RayCast2D" parent="."]
-target_position = Vector2(5, 0)
-collision_mask = 33
-collide_with_areas = true
-
 [node name="The crumb snifferr" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 9
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="The crumb snifferr"]
 shape = SubResource("CircleShape2D_wbf3x")
+
+[node name="MeleeRangeDetector" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="MeleeRangeDetector"]
+shape = SubResource("CircleShape2D_wbf3x")
+
+[node name="Crumbseeker" type="RayCast2D" parent="."]
+target_position = Vector2(5, 0)
+collision_mask = 33
+collide_with_areas = true
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_postprocessing = 1
@@ -82,5 +121,10 @@ libraries = {
 &"": SubResource("AnimationLibrary_4jf10")
 }
 
+[node name="StateTimer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="timeout" from="Memory" to="." method="_on_memory_timeout"]
 [connection signal="area_entered" from="The crumb snifferr" to="." method="_on_the_crumb_snifferr_area_entered"]
+[connection signal="area_entered" from="MeleeRangeDetector" to="." method="_on_melee_range_detector_area_entered"]
+[connection signal="timeout" from="StateTimer" to="." method="_on_state_timer_timeout"]

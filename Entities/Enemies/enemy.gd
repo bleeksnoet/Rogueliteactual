@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+@onready var StateTimer = $StateTimer
 @onready var NavAgent = $NavigationAgent2D
 @onready var Crumbcast = $Crumbseeker
 @onready var Memory = $Memory
@@ -27,15 +28,12 @@ func _ready() -> void:
 	Player = get_tree().get_first_node_in_group("Player")
 
 func _physics_process(delta: float) -> void:
-	if Stunned == true:
-		StunTimer -= delta
+	if !StateTimer.is_stopped():
+		KnockBackVelocity = lerp(KnockBackVelocity, Vector2.ZERO, 0.1)
+		velocity = KnockBackVelocity
 		move_and_slide()
-		
-		if StunTimer <= 0:
-			Stunned = false
 		return
 	seek_out_target()
-
 
 func seek_out_target():
 	if PlayerLastSeen == true:
@@ -62,16 +60,18 @@ func seek_out_target():
 	
 	move_and_slide()
 
-func attacked(duration):
-	Stunned = true
-	StunTimer = duration
+func attacked(duration: float, strength: float, source_position: Vector2):
+	var KnockBackDirection = source_position.direction_to(global_position)
+	KnockBackVelocity = KnockBackDirection * strength
+	StateTimer.start(duration)
 	print("stunned")
-	NavAgent.set_velocity(Vector2.ZERO)
-	velocity = Vector2.ZERO
 	AnimPlayer.play("Hurt")
-	print("ouch")
 
-
+func meleeattack():
+	velocity = Vector2.ZERO
+	KnockBackVelocity = Vector2.ZERO
+	StateTimer.start(0.5)
+	AnimPlayer.play("Strike")
 
 func _on_the_crumb_snifferr_area_entered(area: Area2D) -> void:
 	var TargetPosition = area.global_position
@@ -85,7 +85,12 @@ func _on_the_crumb_snifferr_area_entered(area: Area2D) -> void:
 			LastSeen = area.global_position
 			PlayerLastSeen = true
 
+func _on_melee_range_detector_area_entered(area: Area2D) -> void:
+	meleeattack()
 
 func _on_memory_timeout() -> void:
 	PlayerLastSeen = false
 	LostSight = false
+
+func _on_state_timer_timeout() -> void:
+	KnockBackVelocity = Vector2.ZERO

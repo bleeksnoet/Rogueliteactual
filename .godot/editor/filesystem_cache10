@@ -1,22 +1,22 @@
 63f7b34db8d8cdea90c76aacccf841ec
-::res://::1764316221
+::res://::1769589729
 icon.svg::CompressedTexture2D::2826464484549049150::1762507969::1764255519::1::::<><><>0<>0<>334058d33727010f30dd7e690f7b2f9f<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
 ::res://Assets/::1764253927
 BaseTilemap.tscn::PackedScene::4186870983689807032::1764253927::0::1::::<><><>0<>0<><>::uid://cdvenoqt4dbp6::::res://placeholder assets/2D Pixel Dungeon Asset Pack/character and tileset/Dungeon_Tileset.png
 ::res://Entities/::1763129365
-::res://Entities/Enemies/::1764254481
-enemy.gd::GDScript::7168505179517906439::1764254408::0::1::::<>CharacterBody2D<><>0<>0<><>::
-enemy.tscn::PackedScene::8089859580215015374::1764254481::0::1::::<><><>0<>0<><>::uid://daeqh6k32pevf::::res://Entities/Enemies/enemy.gd<>uid://bne5qtirvnyu5::::res://placeholder assets/2D Pixel Dungeon Asset Pack/character and tileset/Dungeon_Character_2.png
-::res://Entities/objects/::1764082053
-grispable.gd::GDScript::6004698523830851726::1764082035::0::1::::<>RigidBody2D<><>0<>0<><>::
+::res://Entities/Enemies/::1764669538
+enemy.gd::GDScript::7168505179517906439::1764669538::0::1::::<>CharacterBody2D<><>0<>0<><>::
+enemy.tscn::PackedScene::8089859580215015374::1764316952::0::1::::<><><>0<>0<><>::uid://daeqh6k32pevf::::res://Entities/Enemies/enemy.gd<>uid://bne5qtirvnyu5::::res://placeholder assets/2D Pixel Dungeon Asset Pack/character and tileset/Dungeon_Character_2.png
+::res://Entities/objects/::1764333206
+grispable.gd::GDScript::6004698523830851726::1764333206::0::1::::<>RigidBody2D<><>0<>0<><>::
 grispable.tscn::PackedScene::4729370594717153729::1763975366::0::1::::<><><>0<>0<><>::uid://crsyrispur70u::::res://Entities/objects/grispable.gd
-trinket.tscn::PackedScene::5538586289670557264::1764082053::0::1::::<><><>0<>0<><>::uid://crsyrispur70u::::res://Entities/objects/grispable.gd<>uid://bloiggkthwn0b::::res://placeholder assets/2D Pixel Dungeon Asset Pack/items and trap_animation/flasks/flasks_1_4.png
-::res://Entities/Player/::1764255542
+trinket.tscn::PackedScene::5538586289670557264::1764333206::0::1::::<><><>0<>0<><>::uid://crsyrispur70u::::res://Entities/objects/grispable.gd<>uid://bloiggkthwn0b::::res://placeholder assets/2D Pixel Dungeon Asset Pack/items and trap_animation/flasks/flasks_1_4.png
+::res://Entities/Player/::1764669538
 aim_place_holder.gd::GDScript::2772964515854250210::1763027241::0::1::::<>RefCounted<><>0<>0<><>::
 detection_drip.gd::GDScript::6386205983957637471::1764077046::0::1::::<>Area2D<><>0<>0<><>::
 detection_drip.tscn::PackedScene::5404953978928063045::1764152928::0::1::::<><><>0<>0<><>::uid://cw8r45yvpmgrv::::res://Entities/Player/detection_drip.gd
-lilguy.gd::GDScript::306350002901002081::1764078578::0::1::::<>CharacterBody2D<><>0<>0<><>::
-lilguy.tscn::PackedScene::8783474666673690604::1764255542::0::1::::<><><>0<>0<><>::uid://emnsl85ecqrp::::res://Entities/Player/lilguy.gd<>uid://cfrfdgnyddrbf::::res://placeholder assets/2D Pixel Dungeon Asset Pack/items and trap_animation/arrow/Just_arrow.png<>uid://cuisms0quqod5::::res://placeholder assets/2D Pixel Dungeon Asset Pack/interface/arrow_1.png<>uid://bwml47c6fliq3::::res://placeholder assets/2D Pixel Dungeon Asset Pack/character and tileset/Dungeon_Character.png
+lilguy.gd::GDScript::306350002901002081::1764322753::0::1::::<>CharacterBody2D<><>0<>0<><>::
+lilguy.tscn::PackedScene::8783474666673690604::1764669538::0::1::::<><><>0<>0<><>::uid://emnsl85ecqrp::::res://Entities/Player/lilguy.gd<>uid://cfrfdgnyddrbf::::res://placeholder assets/2D Pixel Dungeon Asset Pack/items and trap_animation/arrow/Just_arrow.png<>uid://cuisms0quqod5::::res://placeholder assets/2D Pixel Dungeon Asset Pack/interface/arrow_1.png<>uid://bwml47c6fliq3::::res://placeholder assets/2D Pixel Dungeon Asset Pack/character and tileset/Dungeon_Character.png
 ::res://Levels/::1764253927
 testroom.tscn::PackedScene::8979041028371085802::1764253927::0::1::::<><><>0<>0<><>::uid://dxe1srogdi7b1::::res://Entities/Player/lilguy.tscn<>uid://b0wffhk6cohfc::::res://Assets/BaseTilemap.tscn<>uid://ck56ybjwt5sse::::res://Entities/objects/trinket.tscn<>uid://dni12m8gwrv15::::res://Entities/Enemies/enemy.tscn
 ::res://placeholder assets/::1763975693
